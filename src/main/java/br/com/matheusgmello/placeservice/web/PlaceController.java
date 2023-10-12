@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.matheusgmello.placeservice.api.PlaceRequest;
 import br.com.matheusgmello.placeservice.api.PlaceResponse;
-import br.com.matheusgmello.placeservice.domain.Place;
 import br.com.matheusgmello.placeservice.domain.PlaceService;
 import reactor.core.publisher.Mono;
 
