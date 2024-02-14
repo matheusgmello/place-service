@@ -1,9 +1,90 @@
-<h1 align="center">
-  Place Service
-</h1>
+# Place Service
 
-API para gerenciar lugares (CRUD) que faz parte [desse desafio](https://github.com/RocketBus/quero-ser-clickbus/tree/master/testes/backend-developer) para pessoas desenvolvedoras backend que se candidatam para a ClickBus.
+Aplicação desenvolvida com base no [desafio da ClickBus](https://github.com/RocketBus/quero-ser-clickbus/tree/master/testes/backend-developer). Baseia-se em uma API para fazer gereciamento de lugares.
 
+# Configurações
+
+### Requisitos
+
+- [Java](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
+- [Docker](https://docs.docker.com/)
+
+### Localmente
+
+- Clone o repositório(`git@github.com:matheusgmello/place-service.git`)
+- Fazer a build do projeto(`./mvnw clean package`)
+- Executar o projeto(`java -jar place-service/target/place-service-0.0.1-SNAPSHOT.jar`)
+- Acesse a API em (`localhost:8080`)
+
+### Docker
+
+- Clone o repositório(`git@github.com:matheusgmello/place-service.git`)
+- Fazer a build do projeto(`./mvnw clean package`)
+- Faça a build da imagem(`./mvnw spring-boot:build-image`)
+- Suba o container(`docker run --name place-service -p 8080:8080  -d place-service:0.0.1-SNAPSHOT`)
+
+## Rotas
+
+Durante a aplicação utilizei o [httpie](https://httpie.io) como Rest Client
+
+### POST `/places`
+
+- Faz a criação de um lugar.
+
+#### Request Body
+```json
+{
+    "createdAt": "2023-04-20T19:00:07.241632",
+    "name": "Place",
+    "slug": "place",
+    "state": "State",
+    "updatedAt": "2023-04-20T19:00:07.241632"
+}
+```
+
+### GET `/places/{id}`
+
+- Faz a busca de um único local.
+
+``` json
+{
+    "createdAt": "2023-06-07T14:45:39.693689",
+    "name": "Place",
+    "slug": "place",
+    "state": "State",
+    "updatedAt": "2023-06-07T14:45:39.693689"
+} 
+```
+
+### GET `/places?name=?`
+
+- Busca um local por nome.
+
+```json
+[
+    {
+        "createdAt": "2023-06-07T14:45:39.693689",
+        "name": "Place",
+        "slug": "place",
+        "state": "State",
+        "updatedAt": "2023-06-07T14:45:39.693689"
+    }
+]
+```
+
+### PATCH `/places/{id}`
+
+- Faz uma pequena alteração em um local.
+
+```json
+{
+    "createdAt": "2023-06-07T14:45:39.693689",
+    "name": "New Name",
+    "slug": "new-name",
+    "state": "New State",
+    "updatedAt": "2023-06-07T14:53:21.671129345"
+}
+```
 
 ## Tecnologias
  
@@ -22,105 +103,16 @@ API para gerenciar lugares (CRUD) que faz parte [desse desafio](https://github.c
 - Geração de slugs automática com o Slugify
 - Auditoria sobre criação e atualização da entidade
 
-## Como Executar
+<!--START_SECTION:footer-->
+<br />
 
-### Localmente
-- Clonar repositório git
-- Construir o projeto:
-```
-./mvnw clean package
-```
-- Executar:
-```
-java -jar place-service/target/place-service-0.0.1-SNAPSHOT.jar
-```
+## 🔗 Connect with me
+[![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/matheusgmello)
+[![Reddit](https://img.shields.io/badge/Reddit-%23FF4500.svg?style=for-the-badge&logo=Reddit&logoColor=white)](https://www.reddit.com/user/math7zw)
+[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/matheusgmello/)
 
-A API poderá ser acessada em [localhost:8080](http://localhost:8080).
-### Usando Docker
 
-- Clonar repositório git
-- Construir o projeto:
-```
-./mvnw clean package
-```
-- Construir a imagem:
-```
-./mvnw spring-boot:build-image
-```
-- Executar o container:
-```
-docker run --name place-service -p 8080:8080  -d place-service:0.0.1-SNAPSHOT
-```
+<!--END_SECTION:footer-->
 
-A API poderá ser acessada em [localhost:8080](http://localhost:8080).
 
-## API Endpoints
 
-Para fazer as requisições HTTP abaixo, foi utilizada a ferramenta [httpie](https://httpie.io):
-
-- POST /places
-```
-http POST :8080/places name="Place" state="State"
-
-HTTP/1.1 200 OK
-Content-Length: 129
-Content-Type: application/json
-
-{
-    "createdAt": "2023-04-20T19:00:07.241632",
-    "name": "Place",
-    "slug": "place",
-    "state": "State",
-    "updatedAt": "2023-04-20T19:00:07.241632"
-}
-```
-
-- GET /places/{id}
-```
-http :8080/places/1
-HTTP/1.1 200 OK
-Content-Length: 129
-Content-Type: application/json
-
-{
-    "createdAt": "2023-06-07T14:45:39.693689",
-    "name": "Place",
-    "slug": "place",
-    "state": "State",
-    "updatedAt": "2023-06-07T14:45:39.693689"
-} 
-```
-
-- GET /places?name=?
-```
-http :8080/places name==PLACE
-HTTP/1.1 200 OK
-Content-Type: application/json
-transfer-encoding: chunked
-
-[
-    {
-        "createdAt": "2023-06-07T14:45:39.693689",
-        "name": "Place",
-        "slug": "place",
-        "state": "State",
-        "updatedAt": "2023-06-07T14:45:39.693689"
-    }
-]
-```
-
-- PATCH /places/{id}
-```
-http PATCH :8080/places/1 name='New Name' state='New State'
-HTTP/1.1 200 OK
-Content-Length: 142
-Content-Type: application/json
-
-{
-    "createdAt": "2023-06-07T14:45:39.693689",
-    "name": "New Name",
-    "slug": "new-name",
-    "state": "New State",
-    "updatedAt": "2023-06-07T14:53:21.671129345"
-}
-```
