@@ -9,7 +9,7 @@ import br.com.matheusgmello.placeservice.domain.PlaceService;
 
 @Configuration
 @EnableR2dbcAuditing // Para preencher o createdAt e updatedAt
-public class PlaceConfig {
+public class PlaceServiceConfig {
   @Bean
   PlaceService placeService(PlaceRepository placeRepository) {
     return new PlaceService(placeRepository);
